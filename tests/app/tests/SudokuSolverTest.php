@@ -3,7 +3,7 @@
 namespace app\tests;
 
 
-use SudokuSolver;
+use app\SudokuSolver;
 
 
 class SudokuSolverTest extends \PHPUnit_Framework_TestCase
