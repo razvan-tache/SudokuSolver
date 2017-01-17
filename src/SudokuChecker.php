@@ -1,5 +1,7 @@
 <?php
 
+namespace app;
+
 /**
  * TODO: Test this class
  * A singleton which can check if a sudoku puzzle is solved.
