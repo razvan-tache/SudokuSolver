@@ -1,6 +1,6 @@
 <?php
 
-require_once './SudokuChecker.php';
+require_once './src/SudokuChecker.php';
 
 $puzzle = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9,],
