@@ -53,6 +53,10 @@ class SudokuSolverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->getComplexPuzzleSolution(), $solution);
     }
 
+    /**
+     * Returns an invalid puzzle.
+     * @return array
+     */
     private function getInvalidPuzzle()
     {
         return [
@@ -68,6 +72,10 @@ class SudokuSolverTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * Returns a simple puzzle.
+     * @return array
+     */
     private function getSimplePuzzle()
     {
         return [
@@ -83,6 +91,10 @@ class SudokuSolverTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * Returns the simple puzzle solution.
+     * @return array
+     */
     private function getSimplePuzzleSolution()
     {
         return [
@@ -98,6 +110,10 @@ class SudokuSolverTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * Returns a complex sudoku puzzle.
+     * @return array
+     */
     private function getComplexPuzzle()
     {
         return [
@@ -113,6 +129,10 @@ class SudokuSolverTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * Returns the solution for the complex puzzle.
+     * @return array
+     */
     private function getComplexPuzzleSolution()
     {
         return [
