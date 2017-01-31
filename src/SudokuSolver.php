@@ -56,7 +56,7 @@ class SudokuSolver
                         $this->suggestions[$i][$j] = $this->getPossibleOptions($i, $j);
                         if (count($this->suggestions[$i][$j]) === 1) {
                             $this->solution[$i][$j] = $this->suggestions[$i][$j][0];
-
+                            unset($this->suggestions[$i][$j]);
                             $i = -1;
                             break;
                         }
@@ -67,13 +67,39 @@ class SudokuSolver
             if (SudokuChecker::getInstance()->isSolved($this->solution)) {
                 return true;
             } else {
-
+                return $this->solvePuzzle($this->suggestions);
             }
         } else {
             $this->solution = null;
 
             return false;
         }
+//        return false;
+    }
+
+    /**
+     *
+     */
+    private function solvePuzzle($suggestionArray)
+    {
+        if (empty($suggestionArray)) {
+            return $this->isValidSolution() && SudokuChecker::getInstance()->isSolved($this->solution);
+        }
+
+        $row = array_keys($suggestionArray)[0];
+        $column = array_keys($suggestionArray)[0];
+        $suggestions = $suggestionArray[$row][$column];
+        unset($suggestionArray[$row][$column]);
+
+        foreach ($suggestions as $suggestion) {
+            $this->solution[$row][$column] = $suggestion;
+            $foundSolution = $this->solvePuzzle($suggestionArray);
+            if ($foundSolution === true) {
+                return true;
+            }
+        }
+        $this->solution[$row][$column] = 0;
+
         return false;
     }
 
@@ -126,19 +152,19 @@ class SudokuSolver
             $inCol = [];
             $inSquare = [];
             for ($j = 0; $j < 9; $j++) {
-                if (in_array($this->rows[$i][$j], $inRow)) {
+                if (in_array($this->rows[$i][$j], $inRow) && $this->rows[$i][$j] !== 0) {
                     return false;
                 } else {
                     $inRow[] = $this->rows[$i][$j];
                 }
 
-                if (in_array($this->columns[$i][$j], $inCol)) {
+                if (in_array($this->columns[$i][$j], $inCol) && $this->columns[$i][$j] !== 0) {
                     return false;
                 } else {
                     $inCol[] = $this->columns[$i][$j];
                 }
 
-                if (in_array($this->squares[$i][$j], $inSquare)) {
+                if (in_array($this->squares[$i][$j], $inSquare) && $this->squares[$i][$j] !== 0) {
                     return false;
                 } else {
                     $inSquare[] = $this->squares[$i][$j];
